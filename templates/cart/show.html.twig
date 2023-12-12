@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cart{% endblock %}
+
+{% block body %}
+    <h1>Cart</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ cart.id }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ cart.cdate ? cart.cdate|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+                       
+            {% for d in data %}
+            <tr>
+                <th>Image</th>
+                <td>{{ d.image }}</td>
+            </tr>
+            <tr>
+                <th>Product</th>
+                <td>{{ d.pname }}</td>
+            </tr>
+            
+            {% endfor %}
+            <tr>
+                <th>Quantity</th>
+                <td>{{ cart.cquantity }}</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_cart_index') }}">back to list</a>
+
+    <a href="{{ path('app_cart_edit', {'id': cart.id}) }}">edit</a>
+
+    {{ include('cart/_delete_form.html.twig') }}
+{% endblock %}
